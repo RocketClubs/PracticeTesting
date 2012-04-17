@@ -4,10 +4,10 @@ using System.Linq;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace PracticeTesting
+namespace RocketClubs.Study.PracticeTesting
 {
     [Serializable]
-    [XmlRoot("QuestionPool", Namespace="http://www.bactum.org/practicetesting/")]
+    [XmlRoot("QuestionPool", Namespace="http://www.rocketclubs.com/study/practicetesting/")]
     public class QuestionPool
     {
         [XmlElement("Name")]
@@ -36,49 +36,50 @@ namespace PracticeTesting
 
         public PracticeTest CreatePracticeTest()
         {
-            List<PracticeTestQuestion> questions = new List<PracticeTestQuestion>();
+            var questions = new List<PracticeTestQuestion>();
             
-            this.Sections.ToList().ForEach(section => {
+            Sections.ToList().ForEach(section => {
                 var current = from question in section.Questions.GetRandomSubset(section.NumberOnTest).OrderBy(q => q.Number)
                               select new PracticeTestQuestion(question, section.Name);
 
                 questions.AddRange(current);
             });
 
-            PracticeTest practiceTest = PracticeTest.Create(this.Name, this.PassingScore, this.RandomizeTestOrder ? questions.Randomize() : questions);
+            var practiceTest = PracticeTest.Create(Name, PassingScore, RandomizeTestOrder ? questions.Randomize() : questions);
             return practiceTest;
         }
 
         public PracticeTest CreatePracticeTest(IEnumerable<string> questionIds)
         {
-            List<PracticeTestQuestion> questions = new List<PracticeTestQuestion>();
+            var questions = new List<PracticeTestQuestion>();
 
-            foreach (string questionName in questionIds)
+            foreach (var questionName in questionIds)
             {
-                string[] parts = questionName.Split(new string[] { "-" }, StringSplitOptions.None);
-                string sectionName = parts[0];
-                int questionNumber = Convert.ToInt32(parts[1]);
-                MultipleChoiceQuestion question = this.Sections.First(s => s.Name == parts[0]).Questions.First(q => q.Number == questionNumber);
+                var parts = questionName.Split(new string[] { "-" }, StringSplitOptions.None);
+                var sectionName = parts[0];
+                var questionNumber = Convert.ToInt32(parts[1]);
+                var question = Sections.First(s => s.Name == parts[0]).Questions.First(q => q.Number == questionNumber);
                 questions.Add(new PracticeTestQuestion(question, sectionName));
             }
 
-            PracticeTest practiceTest = PracticeTest.Create(this.Name, this.PassingScore, this.RandomizeTestOrder ? questions.Randomize() : questions);
+            var practiceTest = PracticeTest.Create(Name, PassingScore, RandomizeTestOrder ? questions.Randomize() : questions);
             return practiceTest;
         }
 
+        private static readonly XmlSerializer Serializer = new XmlSerializer(typeof(QuestionPool));
+
         public static QuestionPool LoadFromXmlFile(string fileName)
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(QuestionPool));
-
-            using (XmlTextReader reader = new XmlTextReader(fileName))
+            using (var reader = new XmlTextReader(fileName))
             {
                 try
                 {
-                    QuestionPool questionPool = (QuestionPool)serializer.Deserialize(reader);
+                    var questionPool = (QuestionPool)Serializer.Deserialize(reader);
                     return questionPool;
                 }
                 catch (XmlException)
                 {
+                    // TODO: these are great places to log errors...
                     return null;
                 }
                 catch (InvalidOperationException)

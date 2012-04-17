@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml.Serialization;
 
-namespace PracticeTesting
+namespace RocketClubs.Study.PracticeTesting
 {
     [Serializable]
     [XmlType("Diagram")]
@@ -18,9 +15,5 @@ namespace PracticeTesting
 
         [XmlAttribute("source")]
         public string Source { get; set; }
-
-        public MultipleChoiceDiagram()
-        {
-        }
     }
 }

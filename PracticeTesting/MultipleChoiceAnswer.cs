@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Xml;
 using System.Xml.Serialization;
 
-namespace PracticeTesting
+namespace RocketClubs.Study.PracticeTesting
 {
     [Serializable]
     [XmlType("Answer")]

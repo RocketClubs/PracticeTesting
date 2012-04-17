@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
-namespace PracticeTesting
+namespace RocketClubs.Study.PracticeTesting
 {
     internal static class CommonRegex
     {
-        private static Regex regex = new Regex(@"[\s]+");
+        private static readonly Regex ReduceWhitespaceRegex = new Regex(@"[\s]+", RegexOptions.Compiled);
 
         internal static string ReduceWhitespace(string original)
         {
-            string result = regex.Replace(original, " ").Trim();
+            var result = ReduceWhitespaceRegex.Replace(original, " ").Trim();
             return result;
         }
     }

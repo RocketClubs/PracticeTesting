@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Linq;
-using System.Xml;
 using System.Xml.Serialization;
-using System.Collections.Generic;
 
-namespace PracticeTesting
+namespace RocketClubs.Study.PracticeTesting
 {
     [Serializable]
     [XmlType("Question")]

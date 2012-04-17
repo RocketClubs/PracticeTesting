@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
-namespace PracticeTesting
+namespace RocketClubs.Study.PracticeTesting
 {
     public class PracticeTest
     {
@@ -16,8 +15,7 @@ namespace PracticeTesting
         {
             get
             {
-                int numCorrect = this.Questions.Where(a => a.Correct == true).Count();
-                return numCorrect;
+                return Questions.Count(a => a.Correct);
             }
         }
 

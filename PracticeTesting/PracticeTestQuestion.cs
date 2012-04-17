@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace PracticeTesting
+namespace RocketClubs.Study.PracticeTesting
 {
     public class PracticeTestQuestion : MultipleChoiceQuestion
     {
@@ -15,6 +12,7 @@ namespace PracticeTesting
         {
             get
             {
+                // TODO: this is really hard coded for my own representation, really a display property
                 return String.Format("{0}-{1}", this.Section, this.Number);
             }
         }
@@ -23,7 +21,7 @@ namespace PracticeTesting
         {
             get
             {
-                return AnswerChosen == null ? false : AnswerChosen.Correct;
+                return AnswerChosen != null && AnswerChosen.Correct;
             }
         }
 

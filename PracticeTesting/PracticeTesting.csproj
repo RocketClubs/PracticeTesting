@@ -8,7 +8,7 @@
     <ProjectGuid>{5B70B533-A932-4131-AFE8-AEACF220D53C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PracticeTesting</RootNamespace>
+    <RootNamespace>RocketClubs.Study.PracticeTesting</RootNamespace>
     <AssemblyName>PracticeTesting</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
